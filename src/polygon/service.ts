@@ -18,3 +18,11 @@ export async function fetchPolygons() {
     handleMongooseError(err);
   }
 }
+
+export async function deletePolygon(id: string) {
+  try {
+    await PolygonModel.deleteOne({ _id: id });
+  } catch (err) {
+    handleMongooseError(err);
+  }
+}
