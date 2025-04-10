@@ -24,5 +24,5 @@ export default function errorHandlerMiddleware<
     error.actualError = err;
   }
 
-  res.status(err.statusCode).json(error);
+  res.status(error.statusCode).json(error);
 }
