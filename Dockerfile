@@ -1,5 +1,5 @@
 FROM node:slim
-WORKDIR /usr/src/app
+WORKDIR /usr/app
 COPY . .
 RUN npm install
 RUN npm run build
