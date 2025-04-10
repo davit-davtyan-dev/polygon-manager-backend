@@ -4,7 +4,6 @@ import InterceptableError from "../interceptableError";
 
 const corsMiddleware = cors({
   origin: (origin, callback) => {
-    console.log(origin, "origin");
     if (ORIGIN_WHITELIST.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
