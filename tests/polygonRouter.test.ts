@@ -8,6 +8,7 @@ import {
   emptyPointsData,
   notEnoughPointsData,
   invalidPointsData,
+  notNumberPointsData,
 } from "./data";
 
 describe("Polygon router", () => {
@@ -94,6 +95,18 @@ describe("Polygon router", () => {
     expect(response.body.message).toBe(
       "Each point must be an array with 2 numbers"
     );
+  });
+
+  test("POST /polygon creation should fail bacause of invalid type points data", async () => {
+    const response = await request(app)
+      .post("/polygon")
+      .send(notNumberPointsData)
+      .set("Content-Type", "application/json")
+      .set("Accept", "application/json");
+
+    expect(response.statusCode).toBe(415);
+    expect(response.error).toBeTruthy();
+    expect(response.body.message).toBe("Invalid value type for points.1");
   });
 
   test("DELETE /polygon should remove the single polygon", async () => {

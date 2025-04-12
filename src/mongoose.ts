@@ -16,6 +16,13 @@ export function handleMongooseError(error: any) {
   if (error instanceof mongoose.Error.ValidationError) {
     const firstInvalidFieldError = Object.values(error.errors)[0];
 
+    if (firstInvalidFieldError instanceof mongoose.Error.CastError) {
+      throw new InterceptableError(
+        415,
+        `Invalid value type for ${firstInvalidFieldError.path}`
+      );
+    }
+
     throw new InterceptableError(422, firstInvalidFieldError.message);
   }
 
